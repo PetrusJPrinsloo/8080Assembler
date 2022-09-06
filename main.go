@@ -51,7 +51,7 @@ func main() {
 	}
 }
 
-func convert16to8bytes(s string) []string {
+func convertToBytes(s string) []string {
 	var r []string
 	for i := 0; i < len(s); i += 2 {
 		r = append(r, string(s[i]))
@@ -66,6 +66,17 @@ func writeToFile(file *os.File, s string) {
 	}
 }
 
+func stripByte(s string) string {
+	split := strings.Split(s, ",")
+
+	if len(split) == 2 {
+		s = split[1]
+	}
+	//strip prefix
+	re := regexp.MustCompile(`[$#]+`)
+	return re.ReplaceAllString(s, "")
+}
+
 func cleanString(s string) string {
 	re := regexp.MustCompile(`\s+`)
 	return re.ReplaceAllString(s, " ")
@@ -78,15 +89,34 @@ func assembleLine(line string) string {
 	//get the first part of the line
 	opcode := strings.ToLower(parts[1])
 	//get the rest of the parts
-	//args := parts[1:]
+	args := parts[2]
+	var bytes []string
 	//switch on the opcode
 	switch opcode {
 	case "nop":
 		assembled = "00"
 		break
-	case "LXI":
+	case "lxi":
 		assembled = "01"
-
+		bytes = convertToBytes(args)
+		assembled += bytes[1] + bytes[0]
+		break
+	case "stax":
+		assembled = "02"
+		//todo: check if B, C, D, E, H, L, M, A
+		break
+	case "inx":
+		assembled = "03"
+		//todo: check if B, C, D, E, H, L, M, A
+		break
+	case "inr":
+		assembled = "04"
+		//todo: check if B, C, D, E, H, L, M, A
+		break
+	case "dcr":
+		assembled = "05"
+		//todo: check if B, C, D, E, H, L, M, A
+		break
 	default:
 		fmt.Println("Invalid opcode")
 		//os.Exit(1)
