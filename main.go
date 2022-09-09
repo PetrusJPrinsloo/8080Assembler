@@ -84,36 +84,73 @@ func cleanString(s string) string {
 
 func assembleLine(line string) string {
 	var assembled string
+
 	//split line into parts
 	parts := strings.Split(line, " ")
+
 	//get the first part of the line
-	opcode := strings.ToLower(parts[1])
+	opcode := strings.ToUpper(parts[1])
+
 	//get the rest of the parts
-	args := parts[2]
+	var args string
+	if len(parts) > 2 {
+		args = parts[2]
+	}
+
 	var bytes []string
 	//switch on the opcode
 	switch opcode {
-	case "nop":
+	case "NOP":
 		assembled = "00"
 		break
-	case "lxi":
-		assembled = "01"
+	case "LXI":
 		bytes = convertToBytes(args)
-		assembled += bytes[1] + bytes[0]
+		switch parts[2] {
+		case "B":
+			assembled = "01" + bytes[1] + bytes[0]
+			break
+		case "D":
+			assembled = "11" + bytes[1] + bytes[0]
+			break
+		case "H":
+			assembled = "21" + bytes[1] + bytes[0]
+			break
+		case "SP":
+			assembled = "31" + bytes[1] + bytes[0]
+			break
+		}
 		break
-	case "stax":
-		assembled = "02"
-		//todo: check if B, C, D, E, H, L, M, A
+	case "STAX":
+		switch parts[2] {
+		case "B":
+			assembled = "02"
+			break
+		case "D":
+			assembled = "12"
+			break
+		}
 		break
-	case "inx":
-		assembled = "03"
-		//todo: check if B, C, D, E, H, L, M, A
+	case "INX":
+		switch parts[2] {
+		case "B":
+			assembled = "03"
+			break
+		case "D":
+			assembled = "13"
+			break
+		case "H":
+			assembled = "23"
+			break
+		case "SP":
+			assembled = "33"
+			break
+		}
 		break
-	case "inr":
+	case "INR":
 		assembled = "04"
 		//todo: check if B, C, D, E, H, L, M, A
 		break
-	case "dcr":
+	case "DCR":
 		assembled = "05"
 		//todo: check if B, C, D, E, H, L, M, A
 		break
