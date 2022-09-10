@@ -276,7 +276,255 @@ func assembleLine(line string) string {
 			break
 		}
 		break
-
+	case "RRC":
+		assembled = "0F"
+		break
+	case "RAL":
+		assembled = "17"
+		break
+	case "RAR":
+		assembled = "1F"
+		break
+	case "DAA":
+		assembled = "27"
+		break
+	case "CMA":
+		assembled = "2F"
+		break
+	case "STC":
+		assembled = "37"
+		break
+	case "CMC":
+		assembled = "3F"
+		break
+	case "MOV":
+		regsters := convertToBytes(parts[2])
+		switch regsters[0] {
+		case "B":
+			switch regsters[1] {
+			case "B":
+				assembled = "40"
+				break
+			case "C":
+				assembled = "41"
+				break
+			case "D":
+				assembled = "42"
+				break
+			case "E":
+				assembled = "43"
+				break
+			case "H":
+				assembled = "44"
+				break
+			case "L":
+				assembled = "45"
+				break
+			case "M":
+				assembled = "46"
+				break
+			case "A":
+				assembled = "47"
+				break
+			}
+			break
+		case "C":
+			switch regsters[1] {
+			case "B":
+				assembled = "48"
+				break
+			case "C":
+				assembled = "49"
+				break
+			case "D":
+				assembled = "4A"
+				break
+			case "E":
+				assembled = "4B"
+				break
+			case "H":
+				assembled = "4C"
+				break
+			case "L":
+				assembled = "4D"
+				break
+			case "M":
+				assembled = "4E"
+				break
+			case "A":
+				assembled = "4F"
+				break
+			}
+			break
+		case "D":
+			switch regsters[1] {
+			case "B":
+				assembled = "50"
+				break
+			case "C":
+				assembled = "51"
+				break
+			case "D":
+				assembled = "52"
+				break
+			case "E":
+				assembled = "53"
+				break
+			case "H":
+				assembled = "54"
+				break
+			case "L":
+				assembled = "55"
+				break
+			case "M":
+				assembled = "56"
+				break
+			case "A":
+				assembled = "57"
+				break
+			}
+			break
+		case "E":
+			switch regsters[1] {
+			case "B":
+				assembled = "58"
+				break
+			case "C":
+				assembled = "59"
+				break
+			case "D":
+				assembled = "5A"
+				break
+			case "E":
+				assembled = "5B"
+				break
+			case "H":
+				assembled = "5C"
+				break
+			case "L":
+				assembled = "5D"
+				break
+			case "M":
+				assembled = "5E"
+				break
+			case "A":
+				assembled = "5F"
+				break
+			}
+			break
+		case "H":
+			switch regsters[1] {
+			case "B":
+				assembled = "60"
+				break
+			case "C":
+				assembled = "61"
+				break
+			case "D":
+				assembled = "62"
+				break
+			case "E":
+				assembled = "63"
+				break
+			case "H":
+				assembled = "64"
+				break
+			case "L":
+				assembled = "65"
+				break
+			case "M":
+				assembled = "66"
+				break
+			case "A":
+				assembled = "67"
+				break
+			}
+			break
+		case "L":
+			switch regsters[1] {
+			case "B":
+				assembled = "68"
+				break
+			case "C":
+				assembled = "69"
+				break
+			case "D":
+				assembled = "6A"
+				break
+			case "E":
+				assembled = "6B"
+				break
+			case "H":
+				assembled = "6C"
+				break
+			case "L":
+				assembled = "6D"
+				break
+			case "M":
+				assembled = "6E"
+				break
+			case "A":
+				assembled = "6F"
+				break
+			}
+			break
+		case "M":
+			switch regsters[1] {
+			case "B":
+				assembled = "70"
+				break
+			case "C":
+				assembled = "71"
+				break
+			case "D":
+				assembled = "72"
+				break
+			case "E":
+				assembled = "73"
+				break
+			case "H":
+				assembled = "74"
+				break
+			case "L":
+				assembled = "75"
+				break
+			case "A":
+				assembled = "77"
+				break
+			}
+			break
+		case "A":
+			switch regsters[1] {
+			case "B":
+				assembled = "78"
+				break
+			case "C":
+				assembled = "79"
+				break
+			case "D":
+				assembled = "7A"
+				break
+			case "E":
+				assembled = "7B"
+				break
+			case "H":
+				assembled = "7C"
+				break
+			case "L":
+				assembled = "7D"
+				break
+			case "M":
+				assembled = "7E"
+				break
+			case "A":
+				assembled = "7F"
+				break
+			}
+		}
+	case "HLT":
+		assembled = "76"
+		break
+	case "ADD":
 	default:
 		fmt.Println("Invalid opcode")
 		//os.Exit(1)
