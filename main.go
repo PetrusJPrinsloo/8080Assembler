@@ -525,6 +525,60 @@ func assembleLine(line string) string {
 		assembled = "76"
 		break
 	case "ADD":
+		switch parts[2] {
+		case "B":
+			assembled = "80"
+			break
+		case "C":
+			assembled = "81"
+			break
+		case "D":
+			assembled = "82"
+			break
+		case "E":
+			assembled = "83"
+			break
+		case "H":
+			assembled = "84"
+			break
+		case "L":
+			assembled = "85"
+			break
+		case "M":
+			assembled = "86"
+			break
+		case "A":
+			assembled = "87"
+			break
+		}
+		break
+	case "ADC":
+		switch parts[2] {
+		case "B":
+			assembled = "88"
+			break
+		case "C":
+			assembled = "89"
+			break
+		case "D":
+			assembled = "8A"
+			break
+		case "E":
+			assembled = "8B"
+			break
+		case "H":
+			assembled = "8C"
+			break
+		case "L":
+			assembled = "8D"
+			break
+		case "M":
+			assembled = "8E"
+			break
+		case "A":
+			assembled = "8F"
+			break
+		}
 	default:
 		fmt.Println("Invalid opcode")
 		//os.Exit(1)
