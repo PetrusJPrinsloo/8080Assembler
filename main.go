@@ -804,7 +804,32 @@ func assembleLine(line string) string {
 		assembled = "C6" + parts[2]
 		break
 	case "RST":
-		assembled = "C7"
+		switch parts[2] {
+		case "0":
+			assembled = "C7"
+			break
+		case "1":
+			assembled = "CF"
+			break
+		case "2":
+			assembled = "D7"
+			break
+		case "3":
+			assembled = "DF"
+			break
+		case "4":
+			assembled = "E7"
+			break
+		case "5":
+			assembled = "EF"
+			break
+		case "6":
+			assembled = "F7"
+			break
+		case "7":
+			assembled = "FF"
+			break
+		}
 		break
 	case "RZ":
 		assembled = "C8"
@@ -842,6 +867,85 @@ func assembleLine(line string) string {
 	case "RC":
 		assembled = "D8"
 		break
+	case "JC":
+		assembled = "DA" + getBytes(parts[2])
+		break
+	case "IN":
+		assembled = "DB" + parts[2]
+		break
+	case "CC":
+		assembled = "DC" + getBytes(parts[2])
+		break
+	case "SBI":
+		assembled = "DE" + parts[2]
+		break
+	case "RPO":
+		assembled = "E0"
+		break
+	case "JPO":
+		assembled = "E2" + getBytes(parts[2])
+		break
+	case "XTHL":
+		assembled = "E3"
+		break
+	case "CPO":
+		assembled = "E4" + getBytes(parts[2])
+		break
+	case "ANI":
+		assembled = "E6" + parts[2]
+		break
+	case "RPE":
+		assembled = "E8"
+		break
+	case "PCHL":
+		assembled = "E9"
+		break
+	case "JPE":
+		assembled = "EA" + getBytes(parts[2])
+		break
+	case "XCHG":
+		assembled = "EB"
+		break
+	case "CPE":
+		assembled = "EC" + getBytes(parts[2])
+		break
+	case "XRI":
+		assembled = "EE" + parts[2]
+		break
+	case "RP":
+		assembled = "F0"
+		break
+	case "JP":
+		assembled = "F2" + getBytes(parts[2])
+		break
+	case "DI":
+		assembled = "F3"
+		break
+	case "CP":
+		assembled = "F4" + getBytes(parts[2])
+		break
+	case "ORI":
+		assembled = "F6" + parts[2]
+		break
+	case "RM":
+		assembled = "F8"
+		break
+	case "SPHL":
+		assembled = "F9"
+		break
+	case "JM":
+		assembled = "FA" + getBytes(parts[2])
+		break
+	case "EI":
+		assembled = "FB"
+		break
+	case "CM":
+		assembled = "FC" + getBytes(parts[2])
+		break
+	case "CPI":
+		assembled = "FE" + parts[2]
+		break
+
 	default:
 		fmt.Println("Invalid opcode")
 		//os.Exit(1)
