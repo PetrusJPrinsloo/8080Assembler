@@ -77,6 +77,14 @@ func stripByte(s string) string {
 	return re.ReplaceAllString(s, "")
 }
 
+func getBytes(s string) string {
+	cleaned := stripByte(s)
+	//red first 2 characters
+	firstTwo := cleaned[:2]
+	secondTwo := cleaned[2:4]
+	return secondTwo + "" + firstTwo
+}
+
 func cleanString(s string) string {
 	re := regexp.MustCompile(`\s+`)
 	return re.ReplaceAllString(s, " ")
@@ -636,7 +644,204 @@ func assembleLine(line string) string {
 			break
 		}
 		break
-
+	case "ANA":
+		switch parts[2] {
+		case "B":
+			assembled = "A0"
+			break
+		case "C":
+			assembled = "A1"
+			break
+		case "D":
+			assembled = "A2"
+			break
+		case "E":
+			assembled = "A3"
+			break
+		case "H":
+			assembled = "A4"
+			break
+		case "L":
+			assembled = "A5"
+			break
+		case "M":
+			assembled = "A6"
+			break
+		case "A":
+			assembled = "A7"
+			break
+		}
+		break
+	case "XRA":
+		switch parts[2] {
+		case "B":
+			assembled = "A8"
+			break
+		case "C":
+			assembled = "A9"
+			break
+		case "D":
+			assembled = "AA"
+			break
+		case "E":
+			assembled = "AB"
+			break
+		case "H":
+			assembled = "AC"
+			break
+		case "L":
+			assembled = "AD"
+			break
+		case "M":
+			assembled = "AE"
+			break
+		case "A":
+			assembled = "AF"
+			break
+		}
+		break
+	case "ORA":
+		switch parts[2] {
+		case "B":
+			assembled = "B0"
+			break
+		case "C":
+			assembled = "B1"
+			break
+		case "D":
+			assembled = "B2"
+			break
+		case "E":
+			assembled = "B3"
+			break
+		case "H":
+			assembled = "B4"
+			break
+		case "L":
+			assembled = "B5"
+			break
+		case "M":
+			assembled = "B6"
+			break
+		case "A":
+			assembled = "B7"
+			break
+		}
+		break
+	case "CMP":
+		switch parts[2] {
+		case "B":
+			assembled = "B8"
+			break
+		case "C":
+			assembled = "B9"
+			break
+		case "D":
+			assembled = "BA"
+			break
+		case "E":
+			assembled = "BB"
+			break
+		case "H":
+			assembled = "BC"
+			break
+		case "L":
+			assembled = "BD"
+			break
+		case "M":
+			assembled = "BE"
+			break
+		case "A":
+			assembled = "BF"
+			break
+		}
+		break
+	case "RNZ":
+		assembled = "C0"
+		break
+	case "POP":
+		switch parts[2] {
+		case "B":
+			assembled = "C1"
+			break
+		case "D":
+			assembled = "D1"
+			break
+		case "H":
+			assembled = "E1"
+			break
+		case "PSW":
+			assembled = "F1"
+			break
+		}
+		break
+	case "JNZ":
+		assembled = "C2" + getBytes(parts[2])
+		break
+	case "JMP":
+		assembled = "C3" + getBytes(parts[2])
+		break
+	case "CNZ":
+		assembled = "C4" + getBytes(parts[2])
+		break
+	case "PUSH":
+		switch parts[2] {
+		case "B":
+			assembled = "C5"
+			break
+		case "D":
+			assembled = "D5"
+			break
+		case "H":
+			assembled = "E5"
+			break
+		case "PSW":
+			assembled = "F5"
+			break
+		}
+		break
+	case "ADI":
+		assembled = "C6" + parts[2]
+		break
+	case "RST":
+		assembled = "C7"
+		break
+	case "RZ":
+		assembled = "C8"
+		break
+	case "RET":
+		assembled = "C9"
+		break
+	case "JZ":
+		assembled = "CA" + getBytes(parts[2])
+		break
+	case "CZ":
+		assembled = "CC" + getBytes(parts[2])
+		break
+	case "CALL":
+		assembled = "CD" + getBytes(parts[2])
+		break
+	case "ACI":
+		assembled = "CE" + parts[2]
+		break
+	case "RNC":
+		assembled = "D0"
+		break
+	case "JNC":
+		assembled = "D2" + getBytes(parts[2])
+		break
+	case "OUT":
+		assembled = "D3" + parts[2]
+		break
+	case "CNC":
+		assembled = "D4" + getBytes(parts[2])
+		break
+	case "SUI":
+		assembled = "D6" + parts[2]
+		break
+	case "RC":
+		assembled = "D8"
+		break
 	default:
 		fmt.Println("Invalid opcode")
 		//os.Exit(1)
