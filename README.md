@@ -1,3 +1,3 @@
 # 8080Assembler
 
-A simple assembler for the Inter 8080 Processor.
+A simple assembler for the Intel 8080 Processor.
